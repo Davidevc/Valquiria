@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.davidvalenzuela.valquiria.Clases.Usuario;
+import com.example.davidvalenzuela.valquiria.ListaUsuariosActivity;
 import com.example.davidvalenzuela.valquiria.R;
 
 import java.util.List;
