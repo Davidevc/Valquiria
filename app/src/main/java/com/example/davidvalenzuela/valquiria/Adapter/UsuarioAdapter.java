@@ -37,7 +37,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         View view = inflater.inflate(R.layout.usuario_item, null);
 
         TextView txtTelefono = view.findViewById(R.id.txtTelefono);
-        txtTelefono.setText(usuario.getTelefono());
+        txtTelefono.setText(String.valueOf(usuario.getTelefono()));
 
         TextView txtNombre = view.findViewById(R.id.txtNombre);
         txtNombre.setText(usuario.getNombre());

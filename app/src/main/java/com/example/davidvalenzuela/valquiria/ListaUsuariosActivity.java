@@ -41,7 +41,6 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
 
         lvUsuarios = findViewById(R.id.lvListaUsuarios);
         usuarios = new ArrayList();
-        lvUsuarios.setOnItemClickListener((AdapterView.OnItemClickListener) this);
 
         request = Volley.newRequestQueue(this);
 
