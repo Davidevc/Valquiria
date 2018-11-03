@@ -9,5 +9,6 @@ public class LoginUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_usuario);
+        getActionBar().hide();
     }
 }
