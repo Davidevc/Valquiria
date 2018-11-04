@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.davidvalenzuela.valquiria"
-        minSdkVersion 25
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -28,4 +28,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:16.0.0'
     //Libreria que permite la conexión
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+    compile 'com.android.volley:volley:1.1.1'
+
 }
