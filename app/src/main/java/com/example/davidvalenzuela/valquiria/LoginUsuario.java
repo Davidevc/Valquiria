@@ -99,7 +99,7 @@ public class LoginUsuario extends AppCompatActivity implements Response.Listener
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.hide();
-        Toast.makeText(this,"error "+error.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"error Telefono y/o contraseña",Toast.LENGTH_SHORT).show();
     }
 
     @Override
