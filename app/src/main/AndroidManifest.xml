@@ -15,14 +15,14 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".MainActivity" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".ListaUsuariosActivity">
+        <activity android:name=".ListaUsuariosActivity"></activity>
+        <activity android:name=".LoginUsuario">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-        <activity android:name=".LoginUsuario"></activity>
     </application>
 
 </manifest>
