@@ -46,7 +46,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_registrar_direccion);
         mensaje1 = (TextView) findViewById(R.id.mensaje_id);
         mensaje2 = (TextView) findViewById(R.id.mensaje_id2);
         botonGuardar = (Button) this.findViewById(R.id.btnGuardar);
@@ -68,7 +68,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         List<NameValuePair> nameValuePairs;
         HttpPost httpPost;
         httpClient = new DefaultHttpClient();
-        httpPost = new HttpPost("http://192.168.8.118/gpsbd/insertar.php");//url del servidor
+        httpPost = new HttpPost("http://192.168.64.2/dbRemota/insertar.php");//url del servidor
         //empezamos añadir nuestros datos
         nameValuePairs = new ArrayList<NameValuePair>(4);
         nameValuePairs.add(new BasicNameValuePair("coordenadas",mensaje1.getText().toString().trim()));
@@ -175,7 +175,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
             loc.getLongitude();
             String Text = "Lat = "+ loc.getLatitude() + "\n Long = " + loc.getLongitude();
             mensaje1.setText(Text);
-            //this.mainActivity.setLocation(loc);
+            setLocation(loc);
         }
         @Override
         public void onProviderDisabled(String provider) {
