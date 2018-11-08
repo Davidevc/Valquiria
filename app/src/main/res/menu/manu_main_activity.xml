@@ -5,6 +5,11 @@
 
     <item
         android:id="@+id/i_buscarContacto"
-        android:icon="@drawable/ic_search_user"
         android:title="Buscar Contacto" />
+    <item
+        android:id="@+id/i_ListaContactos"
+        android:title="Lista de contactos" />
+    <item
+        android:id="@+id/i_AgregarDireccion"
+        android:title="Agregar direccion" />
 </menu>
