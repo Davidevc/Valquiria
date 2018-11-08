@@ -61,7 +61,7 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.hide();
-        Toast.makeText(this,"Registro fallido "+error.toString(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Fallo la conexion"+error.toString(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
