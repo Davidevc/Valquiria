@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LoginUsuario"
-    tools:layout_editor_absoluteY="25dp">
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
         android:id="@+id/txtValquiria"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="27dp"
         android:layout_marginEnd="27dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
         android:text="Valquiria"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +24,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="231dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginBottom="23dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +36,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="21dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Telefono"
-            android:inputType="textPersonName" />
+            android:inputType="phone"
+            android:maxLength="9" />
 
         <EditText
             android:id="@+id/etContrasena"
