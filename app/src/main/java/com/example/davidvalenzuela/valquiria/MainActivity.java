@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ListaUsuariosActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.i_AgregarDireccion:
+                Intent intent1 = new Intent(this, RegistrarDireccionActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.i_ListaContactos:
+                break;
             default:
                 break;
 
