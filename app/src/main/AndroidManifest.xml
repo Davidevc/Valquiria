@@ -26,10 +26,23 @@
         </activity>
 
 
+        <service android:name=".Firebase.MiFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
+
+        <service android:name=".Firebase.MiFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+            </intent-filter>
+        </service>
+
         <activity android:name=".RegistroActivity" />
         <activity android:name=".ListaUsuariosActivity"></activity>
         <activity android:name=".LoginUsuario"></activity>
         <activity android:name=".RegistrarDireccionActivity"></activity>
     </application>
+
 
 </manifest>
