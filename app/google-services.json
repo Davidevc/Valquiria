@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "747816474259",
+    "firebase_url": "https://valquiria-e8b44.firebaseio.com",
+    "project_id": "valquiria-e8b44",
+    "storage_bucket": "valquiria-e8b44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747816474259:android:c4764fb0c3282365",
+        "android_client_info": {
+          "package_name": "com.example.davidvalenzuela.valquiria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747816474259-tqbh2n6ttab2qt10t9s00gt17sm0klcv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDja0njLUrLjhsitWlx7WELqWbD4AO_xE0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
