@@ -30,6 +30,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -40,6 +42,11 @@ import java.util.Locale;
 public class RegistrarDireccionActivity extends AppCompatActivity   {
     TextView mensaje1;
     TextView mensaje2;
+    TextView mensaje3;
+
+    Double latitud = 0.0;
+    Double longitud = 0.0;
+
     private Button botonGuardar;
 
 
@@ -49,6 +56,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         setContentView(R.layout.activity_registrar_direccion);
         mensaje1 = (TextView) findViewById(R.id.mensaje_id);
         mensaje2 = (TextView) findViewById(R.id.mensaje_id2);
+        mensaje3 = (TextView) findViewById ( R.id.mensaje_id3 ); //longitud OE
         botonGuardar = (Button) this.findViewById(R.id.btnGuardar);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +79,8 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         httpPost = new HttpPost("http://192.168.64.2/dbRemota/insertar.php");//url del servidor
         //empezamos añadir nuestros datos
         nameValuePairs = new ArrayList<NameValuePair>(4);
-        nameValuePairs.add(new BasicNameValuePair("coordenadas",mensaje1.getText().toString().trim()));
+        nameValuePairs.add(new BasicNameValuePair("longitud",mensaje1.getText().toString().trim()));
+        nameValuePairs.add(new BasicNameValuePair("latitud",mensaje3.getText().toString().trim()));
         nameValuePairs.add(new BasicNameValuePair("direccion",mensaje2.getText().toString().trim()));
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -102,6 +111,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
                         Toast.makeText(context, "Datos insertado con éxito", Toast.LENGTH_LONG).show();
                         mensaje1.setText("");
                         mensaje2.setText("");
+                        mensaje3.setText ( "" );
                     }
                 });
             else
@@ -133,6 +143,7 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
         mensaje1.setText("Localizacion agregada");
         mensaje2.setText("");
+        mensaje3.setText ( "" );
     }
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         if (requestCode == 1000) {
@@ -173,8 +184,14 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
             // debido a la deteccion de un cambio de ubicacion
             loc.getLatitude();
             loc.getLongitude();
-            String Text = "Lat = "+ loc.getLatitude() + "\n Long = " + loc.getLongitude();
+            //String Text = "Lat = "+ loc.getLatitude() + "\n Long = " + loc.getLongitude();
+            //se obtiene longitud y latitud
+            latitud = loc.getLatitude ();
+            longitud = loc.getLongitude ();
+            String Text = "Lat =" + loc.getLatitude ();
+            String Text2 = "Long = " + loc.getLongitude ();
             mensaje1.setText(Text);
+            mensaje3.setText ( Text2 );
             setLocation(loc);
         }
         @Override
