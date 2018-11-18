@@ -70,7 +70,7 @@ public class DireccionDataSource {
         String where = "id="+id;
 
         int result = database.delete("direccion",where,null);
-        Log.i("ContactoDataSourve", "se elimino direccion con id : "+id);
+        Log.i("DireccionDataSourve", "se elimino direccion con id : "+id);
         return(result == 1);
 
     }

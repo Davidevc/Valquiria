@@ -21,8 +21,13 @@ import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.davidvalenzuela.valquiria.Clases.Direccion;
+import com.example.davidvalenzuela.valquiria.DataBase.DireccionDataSource;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -43,6 +48,9 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
     TextView mensaje1;
     TextView mensaje2;
     TextView mensaje3;
+    EditText dpto;
+
+    DireccionDataSource datasource;
 
     Double latitud = 0.0;
     Double longitud = 0.0;
@@ -57,6 +65,8 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         mensaje1 = (TextView) findViewById(R.id.mensaje_id);
         mensaje2 = (TextView) findViewById(R.id.mensaje_id2);
         mensaje3 = (TextView) findViewById ( R.id.mensaje_id3 ); //longitud OE
+        dpto = (EditText) findViewById(R.id.etDepto);
+
         botonGuardar = (Button) this.findViewById(R.id.btnGuardar);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +176,15 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
     }
 
     public void guardarDireccion(){
+        datasource.openDB();
 
+        String direccionP = mensaje2 + " " +dpto.getText().toString();
+
+        Direccion direccion = new Direccion();
+        direccion.setLatitud(latitud);
+        direccion.setLongitud(longitud);
+        direccion.setDireccion(direccionP);
+        direccion.setEstado("");
+        datasource.closeDB();
     }
 }
