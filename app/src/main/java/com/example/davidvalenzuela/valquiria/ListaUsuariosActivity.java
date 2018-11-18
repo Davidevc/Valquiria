@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -124,6 +125,20 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
                 }).setNegativeButton("no", null);
         android.app.AlertDialog alertDialog = alertaGuardarContacto.create();
         alertDialog.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

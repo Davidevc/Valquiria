@@ -3,6 +3,7 @@ package com.example.davidvalenzuela.valquiria;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,7 +30,7 @@ public class ListaContactos extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_contactos);
-        setTitle("Usuarios de la App");
+        setTitle("Lista de Contactos");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lvUsuarios = findViewById(R.id.lvListaUsuarios);
@@ -45,8 +46,22 @@ public class ListaContactos extends AppCompatActivity implements AdapterView.OnI
         usuarios = datasource.obtenerUsuarios();
         datasource.closeDB();
 
-        adapter = new UsuarioAdapter(this, R.layout.usuario_item,usuarios);
+        adapter = new UsuarioAdapter(this, R.layout.usuario2_item,usuarios);
         lvUsuarios.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

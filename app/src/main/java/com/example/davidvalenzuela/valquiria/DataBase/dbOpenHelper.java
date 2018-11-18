@@ -10,7 +10,7 @@ public class dbOpenHelper extends SQLiteOpenHelper {
     public static final String tag = "OpenHeper";
     public static final int VERSION = 1;
 
-    public String CREATE_TABLE_USUARIO = "CREATE TABLE usuario (telefono INT," +
+    public String CREATE_TABLE_USUARIO = "CREATE TABLE usuario (telefono INT PRIMARY KEY ," +
             "nombre TEXT," +
             "apellido TEXT)";
 
