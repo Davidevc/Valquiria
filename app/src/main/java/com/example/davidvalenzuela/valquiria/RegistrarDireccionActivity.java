@@ -61,68 +61,13 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Insertar(RegistrarDireccionActivity.this).execute();
+            guardarDireccion();
             }
         });
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
         } else {
             locationStart();
-        }
-    }
-    //Insertamos los datos a nuestra webService
-    private boolean insertar(){
-        HttpClient httpClient;
-        List<NameValuePair> nameValuePairs;
-        HttpPost httpPost;
-        httpClient = new DefaultHttpClient();
-        httpPost = new HttpPost("http://192.168.64.2/dbRemota/insertar.php");//url del servidor
-        //empezamos añadir nuestros datos
-        nameValuePairs = new ArrayList<NameValuePair>(4);
-        nameValuePairs.add(new BasicNameValuePair("longitud",mensaje1.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("latitud",mensaje3.getText().toString().trim()));
-        nameValuePairs.add(new BasicNameValuePair("direccion",mensaje2.getText().toString().trim()));
-        try {
-            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-            httpClient.execute(httpPost);
-            return true;
-        } catch(UnsupportedEncodingException e){
-            e.printStackTrace();
-        }catch (ClientProtocolException e){
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return  false;
-    }
-    //AsyncTask para insertar Datos
-    class Insertar extends AsyncTask<String,String,String> {
-        private Activity context;
-        Insertar(Activity context){
-            this.context=context;
-        }
-        protected String doInBackground(String... params) {
-            // TODO Auto-generated method stub
-            if(insertar())
-                context.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        Toast.makeText(context, "Datos insertado con éxito", Toast.LENGTH_LONG).show();
-                        mensaje1.setText("");
-                        mensaje2.setText("");
-                        mensaje3.setText ( "" );
-                    }
-                });
-            else
-                context.runOnUiThread(new Runnable(){
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        Toast.makeText(context, "Datos no insertado con éxito", Toast.LENGTH_LONG).show();
-                    }
-                });
-            return null;
         }
     }
     //Apartir de aqui empezamos a obtener la direciones y coordenadas
@@ -218,5 +163,9 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
                     break;
             }
         }
+    }
+
+    public void guardarDireccion(){
+
     }
 }

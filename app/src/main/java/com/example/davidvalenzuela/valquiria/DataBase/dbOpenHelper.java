@@ -13,6 +13,9 @@ public class dbOpenHelper extends SQLiteOpenHelper {
     public String CREATE_TABLE_USUARIO = "CREATE TABLE usuario (telefono INT PRIMARY KEY ," +
             "nombre TEXT," +
             "apellido TEXT)";
+    public String CREATE_TABLE_DIRECCION = "CREATE TABLE direccion (id INTEGER PRIMARY KEY autoincrement," +
+    "longitud DOUBLE , latitud DOUBLE, direccion TEXT,estado TEXT)";
+
 
 
 
@@ -23,6 +26,7 @@ public class dbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL((CREATE_TABLE_USUARIO));
+        db.execSQL((CREATE_TABLE_DIRECCION));
 
     }
 

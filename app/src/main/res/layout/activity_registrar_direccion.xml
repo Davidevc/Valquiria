@@ -9,18 +9,26 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="25dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-            android:text="MIS COORDENADAS  SON:"
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/textView" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text="MIS COORDENADAS  SON:" />
+
         <TextView
             android:id="@+id/mensaje_id"
             android:layout_width="match_parent"
@@ -34,21 +42,38 @@
             android:text="TextView" />
 
         <TextView
-            android:text="MI DIRECCION ES:"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView2" />
+            android:text="MI DIRECCION ES:" />
+
         <TextView
             android:id="@+id/mensaje_id2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
-        <Button
-            android:id="@+id/btnGuardar"
-            android:text="GUARDAR"
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="1dp"></Button>
+            android:text="*Dpto." />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ejemplo: B507"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:text="GUARDAR"></Button>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
