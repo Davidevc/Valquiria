@@ -106,7 +106,7 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         AlertDialog.Builder alertaGuardarContacto = new AlertDialog.Builder(this);
-        alertaGuardarContacto.setMessage("Guardar datos")
+        alertaGuardarContacto.setMessage("¿ Desea Guardar este contacto ?")
                 .setCancelable(false).setPositiveButton("si",
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -119,7 +119,7 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
                         usuario.setApellido(usuario.getApellido());
 
                         datasource.insertarUsuario(usuario);
-                        Log.i("AgregarContacto","Se inserto contacto: "+usuario.toString());
+
                         datasource.closeDB();
                     }
                 }).setNegativeButton("no", null);
