@@ -79,6 +79,8 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
                 startActivity(intent1);
                 break;
             case R.id.i_ListaContactos:
+                Intent intent2 = new Intent(this, ListaContactos.class);
+                startActivity(intent2);
                 break;
             default:
                 break;

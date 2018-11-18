@@ -1,8 +1,13 @@
 package com.example.davidvalenzuela.valquiria;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.davidvalenzuela.valquiria.Adapter.UsuarioAdapter;
 import com.example.davidvalenzuela.valquiria.Clases.Usuario;
+import com.example.davidvalenzuela.valquiria.DataBase.UsuariosDataSource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,7 +29,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListaUsuariosActivity extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener{
+public class ListaUsuariosActivity extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener,AdapterView.OnItemClickListener {
+
+    UsuariosDataSource datasource;
 
     ListView lvUsuarios;
     List<Usuario> usuarios;
@@ -38,9 +46,12 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_usuarios);
         setTitle("Usuarios de la App");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         lvUsuarios = findViewById(R.id.lvListaUsuarios);
         usuarios = new ArrayList();
+        datasource = new UsuariosDataSource(this);
+        lvUsuarios.setOnItemClickListener(this);
 
         request = Volley.newRequestQueue(this);
 
@@ -81,6 +92,7 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
 
                 usuarios.add(usuario);
             }
+
             progreso.hide();
 
             UsuarioAdapter adapter = new UsuarioAdapter(this, R.layout.usuario_item,usuarios);
@@ -88,6 +100,31 @@ public class ListaUsuariosActivity extends AppCompatActivity implements Response
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+        AlertDialog.Builder alertaGuardarContacto = new AlertDialog.Builder(this);
+        alertaGuardarContacto.setMessage("Guardar datos")
+                .setCancelable(false).setPositiveButton("si",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        datasource.openDB();
+                        Usuario usuario = usuarios.get(position);
+                        usuario.setTelefono(usuario.getTelefono());
+                        usuario.setNombre(usuario.getNombre());
+                        usuario.setApellido(usuario.getApellido());
+
+                        datasource.insertarUsuario(usuario);
+                        Log.i("AgregarContacto","Se inserto contacto: "+usuario.toString());
+                        datasource.closeDB();
+                    }
+                }).setNegativeButton("no", null);
+        android.app.AlertDialog alertDialog = alertaGuardarContacto.create();
+        alertDialog.show();
+    }
+
+
 }

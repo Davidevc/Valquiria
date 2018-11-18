@@ -5,6 +5,17 @@ public class Usuario {
     String nombre;
     String apellido;
 
+
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "telefono=" + telefono +
+                ", nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                '}';
+    }
+
     public int getTelefono() {
         return telefono;
     }

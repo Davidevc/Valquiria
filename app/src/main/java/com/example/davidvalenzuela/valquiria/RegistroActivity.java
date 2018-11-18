@@ -116,13 +116,13 @@ public class RegistroActivity extends AppCompatActivity implements Response.List
             String validador = response.getString("validador");
             if (validador.equals("true")){
                 progreso.hide();
-                Toast.makeText(this,"Registro completado",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Registro completado",Toast.LENGTH_LONG).show();
                 telefono.setText("");
                 nombre.setText("");
                 apellido.setText("");
                 contrasena.setText("");
                 confirmarContrasena.setText("");
-                progreso.hide();
+                finish();
             }else if (validador.equals("false")) {
                 progreso.hide();
                 Toast.makeText(this, "Usuario ya existente!", Toast.LENGTH_SHORT).show();
