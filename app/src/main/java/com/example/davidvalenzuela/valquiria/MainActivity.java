@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 import org.json.JSONObject;
 
@@ -41,12 +43,11 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
         FirebaseMessaging.getInstance().subscribeToTopic("all");
 
-        //infoTextView = (TextView) findViewById(R.id.tvInfo);
 
-       /* if (getIntent().getExtras() != null) {
+       /*if (getIntent().getExtras() != null) {
             for (String key : getIntent().getExtras().keySet()){
                 String value = getIntent().getExtras().getString(key);
-                infoTextView.append("\n"+ key + ": "+value);
+                Log.i("MENSAJERECIB",""+ key + ": "+value);
             }
         }*/
 

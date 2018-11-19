@@ -19,6 +19,7 @@ import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,10 +63,12 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar_direccion);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mensaje1 = (TextView) findViewById(R.id.mensaje_id);
         mensaje2 = (TextView) findViewById(R.id.mensaje_id2);
         mensaje3 = (TextView) findViewById ( R.id.mensaje_id3 ); //longitud OE
         dpto = (EditText) findViewById(R.id.etDepto);
+        datasource = new DireccionDataSource(this);
 
         botonGuardar = (Button) this.findViewById(R.id.btnGuardar);
         botonGuardar.setOnClickListener(new View.OnClickListener() {
@@ -178,13 +181,31 @@ public class RegistrarDireccionActivity extends AppCompatActivity   {
     public void guardarDireccion(){
         datasource.openDB();
 
-        String direccionP = mensaje2 + " " +dpto.getText().toString();
+        String direccionP = mensaje2.getText().toString() + " Depto:  " +dpto.getText().toString();
 
         Direccion direccion = new Direccion();
         direccion.setLatitud(latitud);
         direccion.setLongitud(longitud);
         direccion.setDireccion(direccionP);
         direccion.setEstado("");
+        datasource.insertarDireccion(direccion);
         datasource.closeDB();
+
+        Toast.makeText(this, "Direccion ingresada con exito! ", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

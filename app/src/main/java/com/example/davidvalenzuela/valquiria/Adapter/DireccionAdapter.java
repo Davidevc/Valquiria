@@ -43,7 +43,7 @@ public class DireccionAdapter extends ArrayAdapter<Direccion> {
         txtLatitud.setText(direccion.getLatitud().toString());
 
         TextView txtEstado = view.findViewById(R.id.txtEstado);
-        txtEstado .setText(direccion.getLongitud().toString());
+        txtEstado .setText(direccion.getEstado());
 
 
         return view;

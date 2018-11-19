@@ -42,6 +42,7 @@ public class DireccionDataSource {
         if (cursor.getCount()>0){
             while(cursor.moveToNext()){
                 Direccion direccion = new Direccion();
+                direccion.setId(cursor.getLong(cursor.getColumnIndex("id")));
                 direccion.setLatitud(cursor.getDouble(cursor.getColumnIndex("latitud")));
                 direccion.setLongitud(cursor.getDouble(cursor.getColumnIndex("longitud")));
                 direccion.setDireccion(cursor.getString(cursor.getColumnIndex("direccion")));
@@ -65,7 +66,7 @@ public class DireccionDataSource {
         return direccion;
     }
 
-    public boolean eliminarDireccion(int id){
+    public boolean eliminarDireccion(long id){
 
         String where = "id="+id;
 
@@ -73,6 +74,23 @@ public class DireccionDataSource {
         Log.i("DireccionDataSourve", "se elimino direccion con id : "+id);
         return(result == 1);
 
+    }
+
+    public boolean modificarDireccion(long id,String estado){
+
+        ContentValues valores = new ContentValues();
+        valores.put("estado",estado);
+
+        ContentValues valores1 = new ContentValues();
+        valores1.put("estado","''");
+
+        String where1 = "estado='Predeterminado'";
+        database.update("direccion",valores1,where1,null);
+
+        String where = "id="+id;
+        int result = database.update("direccion",valores,where,null);
+
+        return (result == 1);
     }
 
 

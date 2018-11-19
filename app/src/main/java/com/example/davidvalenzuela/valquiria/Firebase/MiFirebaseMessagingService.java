@@ -9,11 +9,19 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.media.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.davidvalenzuela.valquiria.MainActivity;
 import com.example.davidvalenzuela.valquiria.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Array;
+import java.util.Map;
 
 public class MiFirebaseMessagingService extends FirebaseMessagingService {
     @Override
@@ -30,7 +38,15 @@ public class MiFirebaseMessagingService extends FirebaseMessagingService {
         }
         if(remoteMessage.getData().size() > 0){
             Log.d("NOTICIAS","Data: "+remoteMessage.getData());
+            enviarinfo(remoteMessage.getData());
+
         }
+    }
+
+    private void enviarinfo(Map<String,String> data) {
+        
+        Log.i("MENSAJERECIB","");
+
     }
 
     private void mostrarNotificacion(String title, String body) {

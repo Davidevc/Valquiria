@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.davidvalenzuela.valquiria.Adapter.DireccionAdapter;
 import com.example.davidvalenzuela.valquiria.Clases.Direccion;
@@ -67,16 +69,37 @@ public class ListaDirecciones extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         AlertDialog.Builder alertaGuardarContacto = new AlertDialog.Builder(this);
-        alertaGuardarContacto.setMessage("¿ Desea Eliminar este contacto ?")
-                .setCancelable(false).setPositiveButton("si",
+        alertaGuardarContacto.setMessage("Opciones ...")
+                .setCancelable(false).setPositiveButton("Predeterminar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        
+                        datasource.openDB();
+                        Direccion direccion= direcciones.get(position);
+                        Long id1 = direccion.getId();
+                        String estado = "Predeterminado";
+                        datasource.modificarDireccion(id1,estado);
 
+                        datasource.closeDB();
+                        Log.i ("HOLA","todo bien "+ id);
+                        actualizarLista();
                     }
-                }).setNegativeButton("no", null);
+                }).
+                setNeutralButton("Eliminar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        datasource.openDB();
+                        Direccion direccion= direcciones.get(position);
+                        Long id = direccion.getId();
+
+                        datasource.eliminarDireccion(id);
+
+                        datasource.closeDB();
+                        Log.i ("HOLA","todo bien "+ id);
+                        actualizarLista();
+                    }
+                }).setNegativeButton("Cancelar", null);
         android.app.AlertDialog alertDialog = alertaGuardarContacto.create();
         alertDialog.show();
     }
