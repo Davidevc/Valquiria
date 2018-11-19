@@ -1,7 +1,10 @@
 package com.example.davidvalenzuela.valquiria;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.print.PageRange;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.davidvalenzuela.valquiria.Clases.Direccion;
+import com.example.davidvalenzuela.valquiria.DataBase.DireccionDataSource;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
@@ -27,6 +32,8 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener{
     //private TextView infoTextView;
     Button alerta;
+    DireccionDataSource datasource;
+    Direccion direccion;
 
     ProgressDialog progreso;
 
@@ -40,16 +47,16 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
         alerta = (Button) findViewById(R.id.btn_alerta);
         request = Volley.newRequestQueue(this);
+        datasource = new DireccionDataSource(this);
+        direccion = new Direccion();
 
         FirebaseMessaging.getInstance().subscribeToTopic("all");
 
-
-       /*if (getIntent().getExtras() != null) {
-            for (String key : getIntent().getExtras().keySet()){
-                String value = getIntent().getExtras().getString(key);
-                Log.i("MENSAJERECIB",""+ key + ": "+value);
-            }
-        }*/
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("mensaje");
+        if(message != null){
+            mostrarMensaje(message);
+        }
 
         alerta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +65,21 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
             }
         });
 
+    }
+
+    private void mostrarMensaje(String message) {
+        AlertDialog.Builder alertaGuardarContacto = new AlertDialog.Builder(this);
+        alertaGuardarContacto.setMessage(message)
+                .setCancelable(false).setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+
+                    }
+                }).setNegativeButton("Cancelar", null);
+        android.app.AlertDialog alertDialog = alertaGuardarContacto.create();
+        alertDialog.show();
     }
 
     @Override
@@ -96,11 +118,17 @@ public class MainActivity extends AppCompatActivity implements Response.Listener
 
 
     private void enviarAlerta() {
+        datasource.openDB();
+        direccion = datasource.direccionPredeterminada();
+        datasource.closeDB();
+
         progreso = new ProgressDialog(this);
         progreso.setMessage("Cargando...");
         progreso.show();
 
-            String url="http://192.168.64.2/dbRemota/FirebaseMensaje.php";
+            String url="http://192.168.64.2/dbRemota/FirebaseMensaje.php?direccion="+direccion.getDireccion()
+                    +"&longitud="+direccion.getLongitud()
+                    +"&latitud="+direccion.getLatitud();
             url = url.replace(" ","%20");
 
             jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,url,null,this,this);

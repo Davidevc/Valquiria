@@ -93,5 +93,22 @@ public class DireccionDataSource {
         return (result == 1);
     }
 
+    public Direccion direccionPredeterminada(){
+        Direccion direccion = new Direccion();
+        String query = "SELECT direccion,latitud,longitud FROM direccion WHERE estado='Predeterminado'";
+        Cursor cursor = database.rawQuery(query,null);//para retornar contacto de base de datos y se almacenan en un cursor
+
+        Log.i(TAG,"Filar Retornadas: "+cursor.getCount());
+
+        if (cursor.getCount()>0){
+            while(cursor.moveToNext()){
+                direccion.setLatitud(cursor.getDouble(cursor.getColumnIndex("latitud")));
+                direccion.setLongitud(cursor.getDouble(cursor.getColumnIndex("longitud")));
+                direccion.setDireccion(cursor.getString(cursor.getColumnIndex("direccion")));
+            }
+        }
+        return direccion;
+    }
+
 
 }
